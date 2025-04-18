@@ -48,13 +48,15 @@ startServers()
 
 
 // test 
-
+// these imports may be needed 
 import User from './models/User.js'
+import BookClub from './models/BookClub.js'
+import BookReview from './models/BookReview.js'
 
 // test 
  
 
-// user route
+// user model
 
 app.get('/test-user', async (req, res) => {
   try {
@@ -70,8 +72,43 @@ app.get('/test-user', async (req, res) => {
   }
 })
 
+// book club model 
 
 
+app.get('/test-bookclub', async (req, res) => {
+  try {
+    const user = await User.findOne() 
+    const club = await BookClub.create({
+      name: 'Whiskey & Words',
+      members: [user._id],
+      createdBy: user._id
+    })
+    res.json(club)
+  } catch (err) {
+    console.error(err)
+    res.status(500).send('Error creating book club')
+  }
+})
+
+// book review 
+
+app.get('/test-bookreview', async (req, res) => {
+    try {
+      const user = await User.findOne() 
+      const club = await BookClub.findOne()
+      const review = await BookReview.create ({
+        bookName:'Orbital', 
+        reviewText:'Orbital is rubbish.', 
+        tags: ['sci-fi'],
+        reviewer: user._id,
+        bookClub: club._id,
+      })
+      res.json(review)
+    } catch (err) {
+      console.error(err)
+      res.status(500).send('Error creating book review')
+    }
+})
 
 
 

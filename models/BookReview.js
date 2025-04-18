@@ -1,12 +1,12 @@
 import mongoose, { Schema } from 'mongoose'
 
-// Comment Schema (child document)
-const Commentschema = new mongoose.Schema ({
-    content: {type: String, required: true},
-    author: {type: Schema.Types.ObjectId, ref: "User", required: true}
-},{
-timestamps:true 
-})
+// // Comment Schema (child document)
+// const Commentschema = new mongoose.Schema ({
+//     content: {type: String, required: true},
+//     author: {type: Schema.Types.ObjectId, ref: "User", required: true}
+// },{
+// timestamps:true 
+// })
 
 
 // BookReview Schema (parent document)
@@ -16,8 +16,8 @@ const BookReviewSchema = new mongoose.Schema ({
     tags: [String],
     reviewer:{ type: Schema.Types.ObjectId, ref: 'User', required: true },
     bookClub:{type: Schema.Types.ObjectId, ref: 'BookClub', required: true },
-    comments: [commentschema],
-    likes: [{ type: Schema.Types.ObjectId, ref: 'User', required: true }]
+    // comments: [commentSchema],
+    likes: [{ type: Schema.Types.ObjectId, ref: 'User'}]
 }, {
     timestamps:true
     })
