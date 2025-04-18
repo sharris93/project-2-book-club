@@ -14,7 +14,7 @@ const BookReviewSchema = new mongoose.Schema ({
     bookName:{type: String, required: true}, 
     reviewText:{type: String, required: true}, 
     tags: [String],
-    reviewer:{ type: Schema.Types.ObjectId, ref: 'User', required: true },
+    reviewer:{ type: Schema.Types.ObjectId, ref: 'User'},
     bookClub:{type: Schema.Types.ObjectId, ref: 'BookClub', required: true },
     // comments: [commentSchema],
     likes: [{ type: Schema.Types.ObjectId, ref: 'User'}]

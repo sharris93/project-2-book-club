@@ -8,23 +8,34 @@ import MongoStore from 'connect-mongo'
 // import passUserToView from './middleware/passUserToView.js'
 // import passErrorToView from './middleware/passErrorToView.js'
 
-// Routers 
-
-
 // Variables
 
 const app = express()
 const port = process.env.PORT || 3000
 
+
+// Routers 
+import bookReviewsRouter from './controllers/bookreviews.js'
+
+
+
 // Middleware
 
 app.use(morgan('dev'))
+app.use(express.urlencoded()) 
+app.use('/', bookReviewsRouter)
+
 
 // Routes
 // Home page
 app.get('/', (req,res) => {
 return res.render('index.ejs')
 })
+
+// new bookreview form 
+app.get('/', (req,res) => {
+    return res.render('new.ejs')
+    })
 
 // Users (register/login/profile)
 // app.use('/', authRouter)

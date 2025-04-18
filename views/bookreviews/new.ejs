@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create book reivew</title>
+</head>
+<body>
+    <main>
+        <h1 class="text-center">Create a new book review</h1>
+    
+     <!-- HTML Form -->
+     <form class="form" action="/bookreviews" method="POST">
+        <label>Book Name</label> <input type="text" name="bookName" required/>
+        <label>Review</label>
+        <textarea name="reviewText" required></textarea>
+      
+        <label>Tags (comma-separated)</label>
+        <input type="text" name="tags" />
+      
+        <label>Book Club ID</label>
+        <input type="text" name="bookClub" required />
+      
+        <button type="submit">Submit Review</button>
+      </form>
+    
+    </main> 
+</body>
+</html>
