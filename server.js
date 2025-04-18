@@ -47,6 +47,32 @@ startServers()
 
 
 
+// test 
+
+import User from './models/User.js'
+
+// test 
+ 
+
+// user route
+
+app.get('/test-user', async (req, res) => {
+  try {
+    const newUser = await User.create({
+      email: 'test@example.com',
+      name: 'test',
+      password: 'password123' 
+    })
+    res.json(newUser)
+  } catch (err) {
+    console.log(err)
+    res.status(500).send('Error creating user')
+  }
+})
+
+
+
+
 
 
 
