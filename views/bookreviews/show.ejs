@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= bookreview.bookName %> | The Bookish Review</title>
+</head>
+<body>
+  <main class="show-bookreview">
+    <div class="bookreview">
+      <h1><%= bookreview.bookName %></h1>
+      <p><%= bookreview.reviewText %></p>
+
+      <% if (bookreview.reviewer) { %>
+        <p>Written by: <%= bookreview.reviewer?.name || bookreview.reviewer?.email %></p>
+      <% } %>
+
+      <ul class="tags">
+        <% bookreview.tags.forEach(tag => { %>
+          <li><%= tag %></li>
+        <% }) %>
+      </ul>
+    </div>
+  </main>
+</body>
+</html>
