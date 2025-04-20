@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register| The Bookish Review</title>
+</head>
+<body>
+<!-- Logo -->
+<header>
+    <div class="nav">Nav</div>
+    <div class="logo">Logo</div>
+  </header>
+<main>
+    <h1>Register</h1>
+    <% if (errorMessage) { %>
+    <p style="color: red;"><%= errorMessage %></p>
+    <% } %>
+    <form action="/auth/register" method="POST">
+ <label for="name">Name*</label><br/>
+<input type="text" id="name" name="name" required /><br/><br/>
+  
+        <label for="newClub">Create Book Club (optional)</label><br/>
+        <input type="text" id="newClub" name="newClubName" placeholder="New Book Club Name"/><br/><br/>
+  
+        <label for="existingClub">Join Book Club (optional)</label><br/>
+        <input type="text" id="existingClub" name="bookClubId" placeholder="Existing Book Club ID"/><br/><br/>
+  
+        <label for="email">Email*</label><br/>
+        <input type="email" id="email" name="email" required /><br/><br/>
+  
+        <label for="password">Password*</label><br/>
+        <input type="password" id="password" name="password" required /><br/><br/>
+  
+        <label for="confirmPassword">Confirm Password*</label><br/>
+        <input type="password" id="confirmPassword" name="confirmPassword" required /><br/><br/>
+  
+        <button type="submit">Register</button>
+      </form>
+      <p>Already registered? <a href="/auth/login">Login</a></p>
+
+
+</main>
+
+  <!-- Optional footer -->
+  <footer>
+    <a href="https://github.com/your-github-link" target="_blank">GitHub link</a>
+  </footer>
+</body>
+</html>

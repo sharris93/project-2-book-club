@@ -31,7 +31,7 @@
         type="text"
         id="tags"
         name="tags"
-        value="<%= bookreview.tags.join(', ') %>"
+        value="<%= Array.isArray(bookreview.tags) ? bookreview.tags.join(', '):'' %>"
       />
 
       <button type="submit">Update Review</button>

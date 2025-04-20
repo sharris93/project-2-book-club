@@ -1,0 +1,19 @@
+
+    <!-- <div class="brand-logo"> -->
+      <!-- <a href="/">
+        <img src="https://res.cloudinary.com/dg6jhfncj/image/upload/v1744647892/eye-icon-eye-icon-illustration-with-transparent-background-png_tzmtny.png" alt="Image of an eye">
+      </a> -->
+    <nav>
+    <ul>
+    <li><a href="/">Home</a></li>
+    <a href="/bookreviews">Book Reviews</a>
+    <% if (!user) { %>
+        <li><a href="/login">Login</a></li>
+        <li><a href="/register">Register</a></li> 
+    <%}else { %>
+        <li><a href="/profile">Profile</a></li>
+        <li><a href="/bookreviews/new">Create Review</a></li>
+      <li><a href="/logout">Log out</a></li>
+    <% } %>
+    </ul>
+    </nav>

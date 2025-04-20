@@ -16,14 +16,15 @@ const port = process.env.PORT || 3000
 
 // Routers 
 import bookReviewsRouter from './controllers/bookreviews.js'
-
+import authController from './controllers/auth.js'
 
 
 // Middleware
-
+app.use(methodOverride('_method'))
 app.use(morgan('dev'))
 app.use(express.urlencoded()) 
 app.use('/', bookReviewsRouter)
+app.use(authController)
 
 
 // Routes

@@ -20,6 +20,16 @@
         <% }) %>
       </ul>
     </div>
+          <!-- Controls (Edit/Delete) -->
+          <% if (user && bookreview.reviewer.equals(user._id)) { %>      
+            <div class="controls">
+          <a class="edit-btn" href="/articles/<%= article._id %>/edit">✍️</a>
+          <form action="/articles/<%= article._id %>?_method=DELETE" method="POST">
+            <button class="delete-btn" type="submit">🗑️</button>
+          </form>
+        </div>
+      <% } %>
+    </div>
   </main>
 </body>
 </html>
