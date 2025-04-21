@@ -2,25 +2,125 @@ import express from 'express'
 import User from '../models/User.js'
 import BookReview from '../models/BookReview.js'
 import BookClub from '../models/BookClub.js'
-
+import isLoggedOut from '../middleware/isLoggedOut.js'
 const router = express.Router()
 
 // routes 
 
 // register form page 
 
-router.get('/auth/register', (req,res) => {
+router.get('/auth/register', isLoggedOut, (req,res) => {
 
     try { 
         return res.render('auth/register.ejs', {
             errorMessage:''
         })    
     } catch (error){
-        return res.status(500).send('Server Error');
+        return res.status(500).send('Server Error')
 
 }
 })
 
+// login  form page 
+
+router.get('/auth/login', isLoggedOut,  (req,res) => {
+    try{
+        return res.render('auth/login.ejs', {
+            errorMessage:''
+        })
+
+    }catch (error){
+        return res.status(500).send('Server Error')
+    }
+})
+
+// create a user 
+
+router.post('/auth/register', isLoggedOut,  async (req,res) =>{
+    try {
+        const bookclubId = req.body.clubId?.trim()
+
+        let bookclub
+        
+        if (bookclubId) {
+            bookclub = await BookClub.findById(bookclubId)
+
+        if (!bookclub) {
+            return res.status(400).render ('auth/register.ejs', {
+                errorMessage: 'Invalid Book Club ID. Please check and try again.'
+
+            })
+        }
+        } else{
+            bookclub = await BookClub.create({
+                name: `${req.body.name}'s Book Club`,
+                members: [],
+                createdBy: null
+              })
+            }
+    
+        
+            const newUser = await User.create({
+                ...req.body,
+                bookClub: bookclub._id
+              })
+
+              bookclub.members.push(newUser._id)
+              await bookclub.save()
+        
+        return res.redirect ('/auth/login')
+    } catch (error) {
+       
+    return res.status(400).render('auth/register.ejs', {
+        errorMessage: error.message 
+    })
+    }
+})
+
+// user sign in 
+
+router.post('/auth/login', isLoggedOut, async (req, res) => {
+    try {
+        // match users email in the database with an email matching the req.body.email ( email from the form)
+
+        const foundUser = await User.findOne({ email: req.body.email })
+
+        // if user not found , render form with error message 
+        if (!foundUser) {
+            console.log('User was not found')
+            return res.status(401).render('auth/login.ejs', {
+                errorMessage: "Unauthorised"
+            })
+        }
+        req.session.user = {
+            email:foundUser.email,
+            _id:foundUser._id,
+            bookclub:foundUser.bookclub
+        }
+        
+        req.session.save(() => {
+            return res.redirect('/profile')
+          })
+        
+    } catch (error) {
+        console.error(error);
+        return res.status(500).render('auth/login.ejs', {
+            errorMessage: 'Something went wrong'
+        })
+    }
+})
+
+// login the user by adding the details from the form to the req.session 
 
 
+  
+
+  
+// Log out user
+router.get('/auth/log-out', (req, res) => {
+    req.session.destroy(() => {
+      res.redirect('/auth/login')
+    })
+  })
+  
 export default router

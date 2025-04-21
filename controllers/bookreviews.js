@@ -10,14 +10,16 @@ const router = express.Router()
 
 // Index - get all reviews
 
-router.get('bookreviews', async (req,res,next) => {
+router.get('/bookreviews', async (req,res,next) => {
 try {
     const allBookreviews = await BookReview.find()
     return res.render('bookreviews/index.ejs', {
-        bookReviews : allbookreviews, 
-        user: req.session,user
+        bookReviews : allBookreviews, 
+        user: req.session.user
     })
-}catch (error) {}
+}catch (error) {
+    return next(error)
+}
 
 })
 

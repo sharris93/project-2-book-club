@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | The Bookish Record</title>
+</head>
+<body>
+    <!-- Logo -->
+  <header>
+    <div class="nav">Nav</div>
+    <div class="logo">Logo</div>
+  </header>
+
+  <main>
+    <h1>Login</h1>
+
+    <% if (errorMessage) { %>
+        <p style="color: red;"><%= errorMessage %></p>
+      <% } %>
+      <form action="/auth/login" method="POST">
+        <label for="email">Email</label><br/>
+        <input type="email" id="email" name="email" required /><br/><br/>
+  
+        <label for="password">Password</label><br/>
+        <input type="password" id="password" name="password" required /><br/><br/>
+  
+        <button type="submit">Login</button>
+      </form>
+  
+      <p>Don't have an account? <a href="/auth/register">Register</a></p>
+    </main>
+     <!--  GitHub Link Footer -->
+  <footer>
+    <a href="https://github.com/your-github-link" target="_blank">GitHub link</a>
+  </footer>
+</body>
+</html>

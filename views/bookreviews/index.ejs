@@ -6,6 +6,20 @@
     <title>Book reviews | The Bookish Record </title>
 </head>
 <body>
+    <h1>All Book Reviews</h1>
+
+<% if (bookReviews.length > 0) { %>
+  <ul>
+    <% bookReviews.forEach(review => { %>
+      <li>
+        <a href="/bookreviews/<%= review._id %>"><%= review.bookName %></a>
+      </li>
+    <% }) %>
+  </ul>
+<% } else { %>
+  <p>No reviews yet!</p>
+<% } %>
+
     
 </body>
 </html>

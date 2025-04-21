@@ -3,10 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= user.username %>'s profile | The Bookish Record</title></head>
+    <title><%= user.name %>'s profile | The Bookish Record</title>
+</head>
     <link rel="stylesheet" href="/stylesheets/main.css">
 
 <body>
-    
+    <%- include('../partials/nav.ejs') %>
+<main>
+<h1>Welcome, <%=user.name%>'s profile</h1>
+<div class=" profile-actions">
+<a href="/bookreviews/new" class="btn">Create Book Review</a>
+<form action="/invite" method="POST" style="margin-top: 1rem;">
+    <label for="clubInvite">Invite to Book Club / Join by ID</label>
+    <input type="text" name="clubId" id="clubInvite" placeholder="Book Club ID" required />
+    <button type="submit">Submit</button>
+  </form>
+</div>
+
+<% if (userReviews && userReviews.length > 0) { %>
+    <h2>Your Reviews</h2>
+    <ul class="review-list">
+      <% userReviews.forEach(review => { %>
+        <li>
+          <a href="/bookreviews/<%= review._id %>"><%= review.bookName %></a>
+        </li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p>No reviews yet. Get started by creating one!</p>
+  <% } %>
+
+  <footer style="margin-top: 2rem;">
+    <a href="https://github.com/your-github-username" target="_blank">GitHub link</a>
+  </footer>
+
+</main> 
+
 </body>
 </html>

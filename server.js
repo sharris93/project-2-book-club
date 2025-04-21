@@ -13,34 +13,46 @@ import MongoStore from 'connect-mongo'
 const app = express()
 const port = process.env.PORT || 3000
 
-
-// Routers 
-import bookReviewsRouter from './controllers/bookreviews.js'
-import authController from './controllers/auth.js'
-
-
 // Middleware
 app.use(methodOverride('_method'))
 app.use(morgan('dev'))
-app.use(express.urlencoded()) 
+app.use(express.urlencoded({ extended: true })) 
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: process.env.DATABASE_URL
+  })
+}))
 app.use('/', bookReviewsRouter)
-app.use(authController)
+app.use('/', authController)
+app.use('/', userRouter)
+
+
+  // Routers 
+import bookReviewsRouter from './controllers/bookreviews.js'
+import authController from './controllers/auth.js'
+import userRouter from './controllers/users.js'
+
+// Users (register/login/profile)
+
+
 
 
 // Routes
 // Home page
 app.get('/', (req,res) => {
-return res.render('index.ejs')
+return res.render('index.ejs', {
+user: req.session.user
+})
 })
 
-// new bookreview form 
-app.get('/', (req,res) => {
-    return res.render('new.ejs')
-    })
 
-// Users (register/login/profile)
-// app.use('/', authRouter)
-// app.use('/', userRouter)
+// //  bookreview actions - new show update delete  
+// app.get('/', (req,res) => {
+//     return  res.render('new.ejs')
+//     })
 
 
 // ! Listen
