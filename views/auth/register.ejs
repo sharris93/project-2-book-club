@@ -11,8 +11,12 @@
     <div class="nav">Nav</div>
     <div class="logo">Logo</div>
   </header>
-<main>
-    <h1>Register</h1>
+
+  <%- include('../partials/nav.ejs') %>
+
+
+  <main id="main-content"> 
+       <h1>Register</h1>
     <% if (errorMessage) { %>
     <p style="color: red;"><%= errorMessage %></p>
     <% } %>

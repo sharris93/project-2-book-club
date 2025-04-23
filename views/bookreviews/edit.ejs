@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+  <%- include('../partials/head.ejs') %>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit <%= bookreview.bookName %> | The Bookish Review</title>
 </head>
+
 <body>
-  <main>
-    <h1>Edit Your Review for "<%= bookreview.bookName %>"</h1>
+  <%- include('../partials/nav.ejs') %>
+
+  <main id="main-content">
+      <h1>Edit Your Review for "<%= bookreview.bookName %>"</h1>
     <form action="/bookreviews/<%= bookreview._id %>?_method=PUT" method="POST">
       <label for="bookName">Book Name</label>
       <input

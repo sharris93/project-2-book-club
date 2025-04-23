@@ -1,12 +1,14 @@
 
-    <!-- <div class="brand-logo"> -->
-      <!-- <a href="/">
-        <img src="https://res.cloudinary.com/dg6jhfncj/image/upload/v1744647892/eye-icon-eye-icon-illustration-with-transparent-background-png_tzmtny.png" alt="Image of an eye">
-      </a> -->
     <nav>
     <ul>
-    <li><a href="/">Home</a></li>
-    <a href="/bookreviews">Book Reviews</a>
+      <li><button id="nav-toggle">☰ Nav</button></li>
+    </ul>
+  </nav>
+
+  <div id="nav-overlay" class="hidden">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/bookreviews">Book Reviews</a></li>
     <% if (!user) { %>
         <li><a href="/auth/login">Login</a></li>
         <li><a href="/auth/register">Register</a></li> 
@@ -15,5 +17,30 @@
         <li><a href="/bookreviews/new">Create Review</a></li>
       <li><a href="/auth/log-out">Log out</a></li>
     <% } %>
+    <li><a href="#" id="close-nav">X</a></li>
     </ul>
-    </nav>
+  </div>
+
+  <script>
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggleBtn = document.getElementById('nav-toggle');
+      const navOverlay = document.getElementById('nav-overlay');
+      const closeBtn = document.getElementById('close-nav'); 
+  
+      if (toggleBtn && navOverlay && closeBtn) {
+        toggleBtn.addEventListener('click', () => {
+          navOverlay.classList.remove('hidden');
+          navOverlay.classList.add('visible');
+          document.body.classList.add('nav-open'); 
+        });
+  
+        closeBtn.addEventListener('click', () => {
+          navOverlay.classList.remove('visible');
+          navOverlay.classList.add('hidden');
+          document.body.classList.remove('nav-open');
+        });
+      }
+    });
+  </script>
+     

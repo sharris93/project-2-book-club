@@ -27,7 +27,7 @@ router.get('/auth/login', isLoggedOut,  (req,res) => {
     try{
         return res.render('auth/login.ejs', {
             errorMessage:''
-        })
+                })
 
     }catch (error){
         return res.status(500).send('Server Error')
@@ -41,7 +41,7 @@ router.post('/auth/register', isLoggedOut,  async (req,res) =>{
         const bookclubId = req.body.clubId?.trim()
 
         let bookclub
-        
+
         if (bookclubId) {
             bookclub = await BookClub.findById(bookclubId)
 
@@ -66,6 +66,10 @@ router.post('/auth/register', isLoggedOut,  async (req,res) =>{
               })
 
               bookclub.members.push(newUser._id)
+
+              if(!bookclubId){
+                bookclub.createdBy = newUser._id
+              }
               await bookclub.save()
         
         return res.redirect ('/auth/login')
@@ -77,7 +81,7 @@ router.post('/auth/register', isLoggedOut,  async (req,res) =>{
     }
 })
 
-// user sign in 
+// user login
 
 router.post('/auth/login', isLoggedOut, async (req, res) => {
     try {
@@ -95,7 +99,8 @@ router.post('/auth/login', isLoggedOut, async (req, res) => {
         req.session.user = {
             email:foundUser.email,
             _id:foundUser._id,
-            bookclub:foundUser.bookclub
+            bookClub:foundUser.bookClub, 
+            name:foundUser.name
         }
         
         req.session.save(() => {

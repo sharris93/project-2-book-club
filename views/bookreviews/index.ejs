@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('../partials/head.ejs') %>
+   
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>The Bookish Review</title>
+    </head>
     <title>Book reviews | The Bookish Record </title>
-</head>
+    <main id="main-content">
+        </main>
 <body>
+    <%- include('../partials/nav.ejs') %>
+
     <h1>All Book Reviews</h1>
 
 <% if (bookReviews.length > 0) { %>

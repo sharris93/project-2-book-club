@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+  <%- include('../partials/head.ejs') %> 
+
 <head>
-  <meta charset="UTF-8">
   <title><%= bookreview.bookName %> | The Bookish Review</title>
 </head>
 <body>
-  <main class="show-bookreview">
+  <%- include('../partials/nav.ejs') %>
+  
+  <main class="show-bookreview" id="main-content">
     <div class="bookreview">
       <h1><%= bookreview.bookName %></h1>
       <p><%= bookreview.reviewText %></p>

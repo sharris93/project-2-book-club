@@ -5,7 +5,7 @@ import 'dotenv/config'
 import methodOverride from 'method-override'
 import session from 'express-session'
 import MongoStore from 'connect-mongo'
-// import passUserToView from './middleware/passUserToView.js'
+import passUserToView from './middleware/passUserToView.js'
 // import passErrorToView from './middleware/passErrorToView.js'
 
 // Variables
@@ -25,17 +25,17 @@ app.use(session({
     mongoUrl: process.env.DATABASE_URL
   })
 }))
+app.use(passUserToView)
 app.use('/', bookReviewsRouter)
 app.use('/', authController)
 app.use('/', userRouter)
+app.use(express.static('public'))
 
 
-  // Routers 
-import bookReviewsRouter from './controllers/bookreviews.js'
+import bookReviewsRouter from './controllers/Bookreviews.js'
 import authController from './controllers/auth.js'
 import userRouter from './controllers/users.js'
 
-// Users (register/login/profile)
 
 
 
@@ -44,7 +44,7 @@ import userRouter from './controllers/users.js'
 // Home page
 app.get('/', (req,res) => {
 return res.render('index.ejs', {
-user: req.session.user
+
 })
 })
 

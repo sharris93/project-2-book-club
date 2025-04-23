@@ -12,7 +12,10 @@
     <div class="logo">Logo</div>
   </header>
 
-  <main>
+  <%- include('../partials/nav.ejs') %>
+
+
+  <main id="main-content">>
     <h1>Login</h1>
 
     <% if (errorMessage) { %>

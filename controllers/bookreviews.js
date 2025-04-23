@@ -3,6 +3,8 @@ import express from 'express'
 import User from '../models/User.js'
 import BookReview from '../models/BookReview.js'
 import BookClub from '../models/BookClub.js'
+import isLoggedIn from '../middleware/isLoggedIn.js'
+import isReviewer from '../middleware/isReviewer.js'
 
 const router = express.Router()
 
@@ -14,8 +16,7 @@ router.get('/bookreviews', async (req,res,next) => {
 try {
     const allBookreviews = await BookReview.find()
     return res.render('bookreviews/index.ejs', {
-        bookReviews : allBookreviews, 
-        user: req.session.user
+        bookReviews : allBookreviews
     })
 }catch (error) {
     return next(error)
@@ -25,16 +26,18 @@ try {
 
 
 // New - display the form that allows users to submit a create request 
-router.get('/bookreviews/new', (req, res)=>{
-    try{
-return res.render('bookreviews/new.ejs')
+router.get('/bookreviews/new', isLoggedIn, (req, res) => {
+    try {
+      return res.render('bookreviews/new.ejs', {
+      })
     } catch (error) {
-        console.log(error)
+      console.log(error)
     }
-})
+  })
+
 
 // Edit - Displays the form that allows us to submit an UPDATE request
-router.get('/bookreviews/:bookreviewId/edit', async (req, res, next) => {
+router.get('/bookreviews/:bookreviewId/edit', isLoggedIn, isReviewer, async (req, res, next) => {
     try {
         const {bookreviewId} = req.params
         if (!mongoose.isValidObjectId(bookreviewId)) 
@@ -46,8 +49,7 @@ router.get('/bookreviews/:bookreviewId/edit', async (req, res, next) => {
         return next()
 
         return res.render('bookreviews/edit.ejs', {
-            bookreview,
-            user:req.session.user
+            bookreview
 
         })
     } catch (error) {
@@ -66,9 +68,7 @@ router.get('/bookreviews/:bookreviewId', async (req, res, next) =>{
     if (!bookreview) return next()
 
         return res.render('bookreviews/show.ejs', {
-        bookreview,
-        user:req.session.user
-
+        bookreview
         })
     }catch (error) {
         return next(error)
@@ -78,14 +78,14 @@ router.get('/bookreviews/:bookreviewId', async (req, res, next) =>{
 
 // Update - update an existing article
 
-router.put ('/bookreviews/:bookreviewId', async (req, res, next) =>{
+router.put ('/bookreviews/:bookreviewId', isLoggedIn, isReviewer, async (req, res, next) =>{
     try { 
         const {bookreviewId} = req.params
 
         if (!mongoose.isValidObjectId(bookreviewId)) 
             return next ();
-        // const bookreview = await BookReview.findById(bookreviewId)
-        // if (!updatedBookReview ) return next()
+        const bookreview = await BookReview.findById(bookreviewId)
+        if (!bookreview) return next()
         
         await BookReview.findByIdAndUpdate(bookreviewId, req.body)
 
@@ -93,9 +93,8 @@ router.put ('/bookreviews/:bookreviewId', async (req, res, next) =>{
         } catch (error) {
           console.log(error.message)
           return res.render('bookreviews/edit.ejs', {
-            user:req.session.user,
             bookreview:req.body,
-            errorMessage: error.message,
+            errorMessage: error.message
             
     })
 }
@@ -103,7 +102,7 @@ router.put ('/bookreviews/:bookreviewId', async (req, res, next) =>{
 
 // Delete - delete an existing article
 
-router.delete('/bookreviews/:bookreviewId', async (req, res, next) =>{
+router.delete('/bookreviews/:bookreviewId',  isLoggedIn, isReviewer, async (req, res, next) =>{
     try {
         const {bookreviewId} = req.params
         if (!mongoose.isValidObjectId(bookreviewId)) 
@@ -119,9 +118,11 @@ router.delete('/bookreviews/:bookreviewId', async (req, res, next) =>{
 
 // ! Routes that DO NOT render a web page
 // Create - create a new bookreview
-router.post('/bookreviews', async (req, res) => {
+router.post('/bookreviews', isLoggedIn, async (req, res) => {
     try {
-        // req.body.reviewer  = req.session.user._id
+        req.body.reviewer  = req.session.user._id
+        req.body.bookClub = req.session.user.bookClub
+
         const newBookReview = await BookReview.create(req.body)
         return res.redirect(`/bookreviews/${newBookReview._id}`)
     } catch (error) {
