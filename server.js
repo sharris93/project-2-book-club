@@ -7,6 +7,13 @@ import session from 'express-session'
 import MongoStore from 'connect-mongo'
 import passUserToView from './middleware/passUserToView.js'
 import passErrorToView from './middleware/passErrorToView.js'
+import bookReviewsRouter from './controllers/bookreviews.js'
+import authController from './controllers/auth.js'
+import userRouter from './controllers/users.js'
+import User from './models/User.js'
+import BookClub from './models/BookClub.js'
+import BookReview from './models/BookReview.js'
+
 
 // Variables
 
@@ -33,14 +40,6 @@ app.use('/', userRouter)
 app.use(express.static('public'))
 
 
-import bookReviewsRouter from './controllers/bookreviews.js'
-import authController from './controllers/auth.js'
-import userRouter from './controllers/users.js'
-
-
-
-
-
 // Routes
 // Home page
 app.get('/', (req,res) => {
@@ -48,13 +47,6 @@ return res.render('index.ejs', {
 
 })
 })
-
-
-// //  bookreview actions - new show update delete  
-// app.get('/', (req,res) => {
-//     return  res.render('new.ejs')
-//     })
-
 
 // ! Listen
 async function startServers(){
@@ -70,16 +62,6 @@ async function startServers(){
 }
 startServers()
 
-
-
-// test 
-// these imports may be needed 
-import User from './models/User.js'
-import BookClub from './models/BookClub.js'
-import BookReview from './models/BookReview.js'
-
-// test 
- 
 
 // user model
 
@@ -98,7 +80,6 @@ app.get('/test-user', async (req, res) => {
 })
 
 // book club model 
-
 
 app.get('/test-bookclub', async (req, res) => {
   try {

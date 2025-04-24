@@ -75,11 +75,6 @@ async function startServers(){
 }
 startServers()
 
-
-
-
- 
-
 // user model
 
 app.get('/test-user', async (req, res) => {
