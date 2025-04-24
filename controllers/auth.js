@@ -3,6 +3,7 @@ import User from '../models/User.js'
 import BookReview from '../models/BookReview.js'
 import BookClub from '../models/BookClub.js'
 import isLoggedOut from '../middleware/isLoggedOut.js'
+import bcrypt from 'bcrypt'
 const router = express.Router()
 
 // routes 
@@ -58,10 +59,13 @@ router.post('/auth/register', isLoggedOut,  async (req,res) =>{
                 createdBy: null
               })
             }
-    
-        
+    // hash password 
+            const hashedPassword = await bcrypt.hash(req.body.password, 10)
+
             const newUser = await User.create({
-                ...req.body,
+                email: req.body.email,
+                name: req.body.name,
+                password: hashedPassword,
                 bookClub: bookclub._id
               })
 
@@ -96,6 +100,14 @@ router.post('/auth/login', isLoggedOut, async (req, res) => {
                 errorMessage: "Unauthorised"
             })
         }
+
+        const isPasswordCorrect = await bcrypt.compare(req.body.password, foundUser.password)
+        if (!isPasswordCorrect) {
+        return res.status(401).render('auth/login.ejs', {
+        errorMessage: "Invalid credentials"
+        })
+        }
+        
         req.session.user = {
             email:foundUser.email,
             _id:foundUser._id,

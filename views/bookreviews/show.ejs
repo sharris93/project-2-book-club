@@ -23,8 +23,9 @@
         <% }) %>
       </ul>
     </div>
-          <!-- Controls (Edit/Delete) -->
-          <% if (user && bookreview.reviewer.equals(user._id)) { %>      
+
+    <% if (user && bookreview.reviewer && bookreview.reviewer.equals(user._id)) { %>
+ 
             <div class="controls">
           <a class="edit-btn" href="/bookreviews/<%= bookreview._id %>/edit">✍️</a>
           <form action="/bookreviews/<%= bookreview._id %>?_method=DELETE" method="POST">
@@ -34,5 +35,8 @@
       <% } %>
     </div>
   </main>
+<footer style="margin-top: 2rem;">
+  <a href="https://github.com/CharlesAdams19" target="_blank">GitHub link</a>
+</footer>
 </body>
 </html>

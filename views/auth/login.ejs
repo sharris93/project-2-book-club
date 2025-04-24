@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+  <%- include('../partials/head.ejs') %>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Login | The Bookish Record</title>
 </head>
 <body>
-    <!-- Logo -->
-  <header>
-    <div class="nav">Nav</div>
-    <div class="logo">Logo</div>
-  </header>
 
   <%- include('../partials/nav.ejs') %>
 
 
-  <main id="main-content">>
+
+  <main id="main-content">
     <h1>Login</h1>
 
     <% if (errorMessage) { %>
@@ -34,8 +33,8 @@
       <p>Don't have an account? <a href="/auth/register">Register</a></p>
     </main>
      <!--  GitHub Link Footer -->
-  <footer>
-    <a href="https://github.com/your-github-link" target="_blank">GitHub link</a>
-  </footer>
+     <footer style="margin-top: 2rem;">
+      <a href="https://github.com/CharlesAdams19" target="_blank">GitHub link</a>
+    </footer>
 </body>
 </html>

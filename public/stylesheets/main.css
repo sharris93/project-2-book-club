@@ -1,3 +1,26 @@
+/* font */
+
+body {
+    font-family: 'Caveat', sans-serif;
+  }
+
+  body {
+    font-size: 1.25rem; /* around 20px, feel free to adjust */
+    line-height: 1.6;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+  
+  h2 {
+    font-size: 2rem;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+  }
+  
 /* Layout and spacing */
 main {
     padding-top: 60px;
@@ -79,32 +102,45 @@ main {
   /* === Updated Color Theme === */
 body {
     background-color: #fff9e5;
-    font-family: 'Helvetica Neue', sans-serif;
+    font-family: 'Caveat', sans-serif;
     color: #333;
   }
   
   /* Header & Branding */
   h1, h2, h3 {
-    color: #f47057;
+    color: #e88d67
+
+    ;
+  }
+
+  ::placeholder {
+    font-family: 'Caveat', cursive; /* or whichever font you're using */
+    font-size: 1.1rem;
+    color: #999; 
+    input,
+textarea {
+  font-family: 'Caveat', cursive;
+}
+
   }
   
   /* Nav Overlay */
   #nav-overlay {
-    background-color: #f47057; /* coral red like your screenshot */
+    background-color: #e88d67; 
     color: #fff;
     font-size: 2rem;
     text-align: center;
   }
   
   #nav-overlay a {
-    color: #ffe6d5;
+    color:#e88d67;
     text-decoration: none;
     display: block;
     margin: 1rem 0;
   }
   
   #nav-overlay a:hover {
-    background-color: #d85c48;
+    background-color: #e88d67;
     padding: 0.2rem 1rem;
     border-radius: 4px;
   }
@@ -127,7 +163,7 @@ body {
   
   /* Nav Toggle Button */
   #nav-toggle {
-    background-color: #f47057;
+    background-color:#e88d67;
     border: 2px solid white;
     color: white;
     font-size: 1.2rem;
@@ -165,7 +201,7 @@ body {
   
   /* Links */
   a {
-    color: #f47057;
+    color: #e88d67;
   }
   
   a:hover {

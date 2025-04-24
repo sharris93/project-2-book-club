@@ -7,6 +7,8 @@
 
     <main id="main-content">
       <h1>Welcome, <%= user.name %>'s profile!</h1>
+      <p>You are in the book club: <strong><%= user.bookClub.name %></strong></p>
+      <p>Book Club ID: <code><%= user.bookClub._id %></code></p>
 
       <p>You are in the book club: <strong><%= user.bookClub.name %></strong></p>
 
@@ -32,10 +34,10 @@
       <% } else { %>
         <p>No reviews yet. Get started by creating one!</p>
       <% } %>
-
-      <footer style="margin-top: 2rem;">
-        <a href="https://github.com/your-github-username" target="_blank">GitHub link</a>
-      </footer>
     </main>
+      <footer style="margin-top: 2rem;">
+        <a href="https://github.com/CharlesAdams19" target="_blank">GitHub link</a>
+      </footer>
+  
   </body>
 </html>

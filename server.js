@@ -6,7 +6,7 @@ import methodOverride from 'method-override'
 import session from 'express-session'
 import MongoStore from 'connect-mongo'
 import passUserToView from './middleware/passUserToView.js'
-// import passErrorToView from './middleware/passErrorToView.js'
+import passErrorToView from './middleware/passErrorToView.js'
 
 // Variables
 
@@ -26,6 +26,7 @@ app.use(session({
   })
 }))
 app.use(passUserToView)
+app.use(passErrorToView)
 app.use('/', bookReviewsRouter)
 app.use('/', authController)
 app.use('/', userRouter)
@@ -134,6 +135,11 @@ app.get('/test-bookreview', async (req, res) => {
     }
 })
 
+
+// 404 handler
+app.use ((req, res) =>{
+  res.status(404).render('not-found.ejs')
+})
 
 
 
