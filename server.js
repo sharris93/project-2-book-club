@@ -63,6 +63,15 @@ async function startServers(){
 startServers()
 
 
+
+// 404 handler
+app.use ((req, res) =>{
+  res.status(404).render('not-found.ejs')
+})
+
+// comment out 
+
+
 // // user model
 
 // app.get('/test-user', async (req, res) => {
@@ -115,13 +124,6 @@ startServers()
 //       res.status(500).send('Error creating book review')
 //     }
 // })
-
-
-// 404 handler
-app.use ((req, res) =>{
-  res.status(404).render('not-found.ejs')
-})
-
 
 
 

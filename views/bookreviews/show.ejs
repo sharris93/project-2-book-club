@@ -1,42 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-  <%- include('../partials/head.ejs') %> 
+  <%- include('../partials/head.ejs') %>
 
 <head>
   <title><%= bookreview.bookName %> | The Bookish Review</title>
 </head>
 <body>
   <%- include('../partials/nav.ejs') %>
-  
-  <main class="show-bookreview" id="main-content">
-    <div class="bookreview">
-      <h1><%= bookreview.bookName %></h1>
+
+  <main id="main-content">
+    <div class="form-container"> <!-- reuse existing styles -->
+      <h1 class="form-title"><%= bookreview.bookName %></h1>
+
       <p><%= bookreview.reviewText %></p>
 
       <% if (bookreview.reviewer) { %>
-        <p>Written by: <%= bookreview.reviewer?.name || bookreview.reviewer?.email %></p>
+        <p><strong>Written by:</strong> <%= bookreview.reviewer?.name || bookreview.reviewer?.email %></p>
       <% } %>
 
-      <ul class="tags">
-        <% bookreview.tags.forEach(tag => { %>
-          <li><%= tag %></li>
-        <% }) %>
-      </ul>
-    </div>
+      <% if (bookreview.tags.length) { %>
+        <p><strong>Tags:</strong></p>
+        <ul class="tags">
+          <% bookreview.tags.forEach(tag => { %>
+            <li><%= tag %></li>
+          <% }) %>
+        </ul>
+      <% } %>
 
-    <% if (user && bookreview.reviewer && bookreview.reviewer.equals(user._id)) { %>
- 
-            <div class="controls">
-          <a class="edit-btn" href="/bookreviews/<%= bookreview._id %>/edit">✍️</a>
+      <% if (user && bookreview.reviewer && bookreview.reviewer.equals(user._id)) { %>
+        <div class="controls" style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+          <a class="edit-btn" href="/bookreviews/<%= bookreview._id %>/edit" title="Edit Review">✍️ Edit</a>
           <form action="/bookreviews/<%= bookreview._id %>?_method=DELETE" method="POST">
-            <button class="delete-btn" type="submit">🗑️</button>
+            <button class="delete-btn" type="submit" title="Delete Review">🗑️ Delete</button>
           </form>
         </div>
       <% } %>
     </div>
   </main>
-<footer style="margin-top: 2rem;">
-  <a href="https://github.com/CharlesAdams19" target="_blank">GitHub link</a>
-</footer>
+
+  <footer style="margin-top: 2rem;">
+    <a href="https://github.com/CharlesAdams19" target="_blank">GitHub link</a>
+  </footer>
 </body>
 </html>
