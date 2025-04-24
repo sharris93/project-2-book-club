@@ -63,58 +63,58 @@ async function startServers(){
 startServers()
 
 
-// user model
+// // user model
 
-app.get('/test-user', async (req, res) => {
-  try {
-    const newUser = await User.create({
-      email: 'test@example.com',
-      name: 'test',
-      password: 'password123' 
-    })
-    res.json(newUser)
-  } catch (err) {
-    console.log(err)
-    res.status(500).send('Error creating user')
-  }
-})
+// app.get('/test-user', async (req, res) => {
+//   try {
+//     const newUser = await User.create({
+//       email: 'test@example.com',
+//       name: 'test',
+//       password: 'password123' 
+//     })
+//     res.json(newUser)
+//   } catch (err) {
+//     console.log(err)
+//     res.status(500).send('Error creating user')
+//   }
+// })
 
-// book club model 
+// // book club model 
 
-app.get('/test-bookclub', async (req, res) => {
-  try {
-    const user = await User.findOne() 
-    const club = await BookClub.create({
-      name: 'Whiskey & Words',
-      members: [user._id],
-      createdBy: user._id
-    })
-    res.json(club)
-  } catch (err) {
-    console.error(err)
-    res.status(500).send('Error creating book club')
-  }
-})
+// app.get('/test-bookclub', async (req, res) => {
+//   try {
+//     const user = await User.findOne() 
+//     const club = await BookClub.create({
+//       name: 'Whiskey & Words',
+//       members: [user._id],
+//       createdBy: user._id
+//     })
+//     res.json(club)
+//   } catch (err) {
+//     console.error(err)
+//     res.status(500).send('Error creating book club')
+//   }
+// })
 
-// book review 
+// // book review 
 
-app.get('/test-bookreview', async (req, res) => {
-    try {
-      const user = await User.findOne() 
-      const club = await BookClub.findOne()
-      const review = await BookReview.create ({
-        bookName:'Orbital', 
-        reviewText:'Orbital is rubbish.', 
-        tags: ['sci-fi'],
-        reviewer: user._id,
-        bookClub: club._id,
-      })
-      res.json(review)
-    } catch (err) {
-      console.error(err)
-      res.status(500).send('Error creating book review')
-    }
-})
+// app.get('/test-bookreview', async (req, res) => {
+//     try {
+//       const user = await User.findOne() 
+//       const club = await BookClub.findOne()
+//       const review = await BookReview.create ({
+//         bookName:'Orbital', 
+//         reviewText:'Orbital is rubbish.', 
+//         tags: ['sci-fi'],
+//         reviewer: user._id,
+//         bookClub: club._id,
+//       })
+//       res.json(review)
+//     } catch (err) {
+//       console.error(err)
+//       res.status(500).send('Error creating book review')
+//     }
+// })
 
 
 // 404 handler
