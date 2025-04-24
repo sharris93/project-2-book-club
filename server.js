@@ -33,7 +33,7 @@ app.use('/', userRouter)
 app.use(express.static('public'))
 
 
-import bookReviewsRouter from './controllers/Bookreviews.js'
+import bookReviewsRouter from './controllers/reviews.js'
 import authController from './controllers/auth.js'
 import userRouter from './controllers/users.js'
 
