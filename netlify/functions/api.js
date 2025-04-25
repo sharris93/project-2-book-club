@@ -11,27 +11,16 @@ import passErrorToView from '../../middleware/passErrorToView.js'
 import bookReviewsRouter from '../../controllers/bookreviews.js'
 import authController from '../../controllers/auth.js'
 import userRouter from '../../controllers/users.js'
-import User from '../../models/User.js'
-import BookClub from '../../models/BookClub.js'
-import BookReview from '../../models/BookReview.js'
 import bodyParser from '../../middleware/bodyParser.js'
 
 // Variables
 
 const app = express()
-const port = process.env.PORT || 3000
 
 // Middleware
 app.use(methodOverride('_method'))
 app.use(bodyParser)
-app.use((req,res,next) =>{
-console.log(req.method + " " + req.url)
-console.log(req.body)
-next()
-
-})
-
-
+app.use(morgan('dev'))
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
