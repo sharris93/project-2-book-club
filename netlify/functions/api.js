@@ -14,7 +14,7 @@ import userRouter from '../../controllers/users.js'
 import User from '../../models/User.js'
 import BookClub from '../../models/BookClub.js'
 import BookReview from '../../models/BookReview.js'
-import bodyParser from 'body-parser'
+import bodyParser from '../../middleware/bodyParser.js'
 
 // Variables
 
@@ -23,11 +23,10 @@ const port = process.env.PORT || 3000
 
 // Middleware
 app.use(methodOverride('_method'))
-app.use(bodyParser.urlencoded())
+app.use(bodyParser)
 app.use((req,res,next) =>{
 console.log(req.method + " " + req.url)
 console.log(req.body)
-console.log("content type", req.headers['content-type'])
 next()
 
 })
@@ -57,7 +56,18 @@ return res.render('index.ejs', {
 })
 })
 
-
+// ! Listen
+async function startServers(){
+    try {
+      // Connect to MongoDB
+      await mongoose.connect(process.env.MONGODB_URI)
+      console.log(`🔒 Database connection established`)
+    // Connect the Express Server
+} catch (error) {
+  console.log(error)
+}
+}
+startServers()
 
 
 // 404 handler
