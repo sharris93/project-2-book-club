@@ -10,7 +10,6 @@ export default function bodyParser(req, res, next) {
       data += chunk;
     });
     req.on('end', () => {
-      console.log('parsed:', querystring.parse(data))
       req.body = querystring.parse(data);
     });
   }

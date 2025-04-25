@@ -1,10 +1,8 @@
 import express from 'express'
 import User from '../models/User.js'
-import BookReview from '../models/BookReview.js'
 import BookClub from '../models/BookClub.js'
 import isLoggedOut from '../middleware/isLoggedOut.js'
 import bcrypt from 'bcrypt'
-import bodyParser from '../middleware/bodyParser.js'
 
 const router = express.Router()
 
@@ -90,7 +88,7 @@ router.post('/auth/register', isLoggedOut,  async (req,res) =>{
 
 // user login
 
-router.post('/auth/login', isLoggedOut, bodyParser, async (req, res) => {
+router.post('/auth/login', isLoggedOut, async (req, res) => {
     try {
         console.log('Body inside controller', req.body)
         // match users email in the database with an email matching the req.body.email ( email from the form)
