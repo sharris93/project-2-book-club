@@ -1,51 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-  <%- include('../partials/head.ejs') %>
+<%- include('../partials/head.ejs') %>
 
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register| The Bookish Review</title>
-</head>
-<body>
+  </head>
 
-  <%- include('../partials/nav.ejs') %>
+  <body>
 
-
-  <main id="main-content"> 
-       <h1>Register</h1>
-    <% if (errorMessage) { %>
-    <p style="color: red;"><%= errorMessage %></p>
-    <% } %>
-    <form action="/auth/register" method="POST">
- <label for="name">Name*</label><br/>
-<input type="text" id="name" name="name" required /><br/><br/>
-  
-        <label for="newClub">Create Book Club (optional)</label><br/>
-        <input type="text" id="newClub" name="newClubName" placeholder="New Book Club Name"/><br/><br/>
-  
-        <label for="existingClub">Join Book Club (optional)</label><br/>
-        <input type="text" id="existingClub" name="clubId" placeholder="Enter a club ID or leave blank"/><br/><br/>
-  
-        <label for="email">Email*</label><br/>
-        <input type="email" id="email" name="email" required /><br/><br/>
-  
-        <label for="password">Password*</label><br/>
-        <input type="password" id="password" name="password" required /><br/><br/>
-  
-        <label for="confirmPassword">Confirm Password*</label><br/>
-        <input type="password" id="confirmPassword" name="confirmPassword" required /><br/><br/>
-  
-        <button type="submit">Register</button>
-      </form>
-      <p>Already registered? <a href="/auth/login">Login</a></p>
+    <%- include('../partials/nav.ejs') %>
 
 
-</main>
+      <main id="main-content">
+        <h1>Register</h1>
+        <% if (errorMessage) { %>
+          <p style="color: red;">
+            <%= errorMessage %>
+          </p>
+          <% } %>
+            <form action="/auth/register" method="POST">
+              <label for="name">Name*</label><br />
+              <input type="text" id="name" name="name" required /><br /><br />
 
-  <!-- Optional footer -->
-  <footer style="margin-top: 2rem;">
-    <a href="https://github.com/CharlesAdams19" target="_blank">GitHub link</a>
-  </footer>
-</body>
+              <label for="newClub">Create Book Club (optional)</label><br />
+              <input type="text" id="newClub" name="newClubName" placeholder="New Book Club Name" /><br /><br />
+
+              <label for="existingClub">Join Book Club (optional)</label><br />
+              <input type="text" id="existingClub" name="clubId"
+                placeholder="Enter a club ID or leave blank" /><br /><br />
+
+              <label for="email">Email*</label><br />
+              <input type="email" id="email" name="email" required /><br /><br />
+
+              <label for="password">Password*</label><br />
+              <input type="password" id="password" name="password" required /><br /><br />
+
+              <label for="confirmPassword">Confirm Password*</label><br />
+              <input type="password" id="confirmPassword" name="confirmPassword" required /><br /><br />
+
+              <button type="submit">Register</button>
+            </form>
+            <p>Already registered? <a href="/auth/login">Login</a></p>
+
+
+      </main>
+
+      <!-- Optional footer -->
+      <footer style="margin-top: 2rem;">
+        <a href="https://github.com/CharlesAdams19" target="_blank">GitHub link</a>
+      </footer>
+  </body>
+
 </html>

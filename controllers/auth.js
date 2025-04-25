@@ -39,6 +39,7 @@ router.get('/auth/login', isLoggedOut,  (req,res) => {
 
 router.post('/auth/register', isLoggedOut,  async (req,res) =>{
     try {
+        console.log(req.body, "is this working")
         const bookclubId = req.body.clubId?.trim()
 
         let bookclub
@@ -107,7 +108,7 @@ router.post('/auth/login', isLoggedOut, async (req, res) => {
         errorMessage: "Invalid credentials"
         })
         }
-        
+
         req.session.user = {
             email:foundUser.email,
             _id:foundUser._id,
