@@ -90,6 +90,7 @@ router.post('/auth/register', isLoggedOut,  async (req,res) =>{
 
 router.post('/auth/login', isLoggedOut, async (req, res) => {
     try {
+        console.log(req.body.email)
         // match users email in the database with an email matching the req.body.email ( email from the form)
 
         const foundUser = await User.findOne({ email: req.body.email })
