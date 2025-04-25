@@ -20,6 +20,10 @@ const app = express()
 // Middleware
 app.use(methodOverride('_method'))
 app.use(bodyParser)
+app.use((req, res, next) => {
+  console.log('RB After:', req.body)
+  next()
+})
 app.use(morgan('dev'))
 app.use(session({
   secret: process.env.SESSION_SECRET,
