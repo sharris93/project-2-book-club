@@ -29,7 +29,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
-    mongoUrl: process.env.DATABASE_URL
+    mongoUrl: process.env.MONGODB_URI
   })
 }))
 app.use(passUserToView)
@@ -52,7 +52,7 @@ return res.render('index.ejs', {
 async function startServers(){
     try {
       // Connect to MongoDB
-      await mongoose.connect(process.env.DATABASE_URL)
+      await mongoose.connect(process.env.MONGODB_URI)
       console.log(`🔒 Database connection established`)
     // Connect the Express Server
     app.listen(port, () => console.log(`🚀 Server up and running on port ${port}`))
