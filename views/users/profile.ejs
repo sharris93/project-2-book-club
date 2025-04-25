@@ -1,43 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
   <%- include('../partials/head.ejs') %>
-
   <body>
     <%- include('../partials/nav.ejs') %>
 
-    <main id="main-content">
-      <h1>Welcome, <%= user.name %>'s profile!</h1>
-      <p>You are in the book club: <strong><%= user.bookClub.name %></strong></p>
-      <p>Book Club ID: <code><%= user.bookClub._id %></code></p>
+    <main id="main-content" class="profile-container">
+      <h1 class="center-text">Welcome, <%= user.name %>!</h1>
 
-      <p>You are in the book club: <strong><%= user.bookClub.name %></strong></p>
+      <section class="club-info center-text">
+        <p><strong>Book Club:</strong> <%= user.bookClub.name %></p>
+        <p>
+          <strong>Club ID:</strong> 
+          <code id="clubId"><%= user.bookClub._id %></code>
+          <button onclick="copyClubId()">📋 Copy</button>
+        </p>
+      </section>
 
-      <div class="profile-actions">
-        <a href="/bookreviews/new" class="btn">Create Book Review</a>
+      <section class="profile-actions center-text">
+        <a href="/bookreviews/new" class="btn">➕ Create Book Review</a>
 
-        <form action="/invite" method="POST" style="margin-top: 1rem;">
-          <label for="clubId">Invite to Book Club / Join by ID:</label>
-          <input type="text" name="clubId" placeholder="Book Club ID">
-          <button type="submit">Submit</button>
+        <form action="/invite" method="POST" class="invite-form">
+          <label for="clubId">Join a different book club:</label>
+          <input type="text" name="clubId" placeholder="Enter Club ID">
+          <button type="submit">Join</button>
         </form>
-      </div>
+      </section>
 
       <% if (userReviews && userReviews.length > 0) { %>
-        <h2>Your Reviews</h2>
-        <ul class="review-list">
-          <% userReviews.forEach(review => { %>
-            <li>
-              <a href="/bookreviews/<%= review._id %>"><%= review.bookName %></a>
-            </li>
-          <% }) %>
-        </ul>
+        <section class="reviews">
+          <h2 class="center-text">Your Reviews</h2>
+          <ul class="review-list">
+            <% userReviews.forEach(review => { %>
+              <li>
+                <a href="/bookreviews/<%= review._id %>"><%= review.bookName %></a>
+                <div class="review-controls">
+                  <a href="/bookreviews/<%= review._id %>/edit">✏️ Edit</a>
+                  <form action="/bookreviews/<%= review._id %>?_method=DELETE" method="POST" style="display:inline;">
+                    <button type="submit" class="delete-btn">🗑️ Delete</button>
+                  </form>
+                </div>
+              </li>
+            <% }) %>
+          </ul>
+        </section>
       <% } else { %>
-        <p>No reviews yet. Get started by creating one!</p>
+        <p class="center-text">No reviews yet. Get started by creating one!</p>
       <% } %>
     </main>
-      <footer style="margin-top: 2rem;">
-        <a href="https://github.com/CharlesAdams19" target="_blank">GitHub link</a>
-      </footer>
-  
+
+    <footer class="fixed-footer">
+      <a href="https://github.com/CharlesAdams19" target="_blank">GitHub link</a>
+    </footer>
+
+    <script>
+      function copyClubId() {
+        const clubId = document.getElementById("clubId").innerText;
+        navigator.clipboard.writeText(clubId).then(() => {
+          alert("Club ID copied to clipboard!");
+        });
+      }
+    </script>
   </body>
 </html>

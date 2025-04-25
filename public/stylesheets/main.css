@@ -354,3 +354,41 @@ form.form input[name="tags"] {
     max-width: 600px;
     margin: 0 auto;
   }
+  .center-text {
+    text-align: center;
+  }
+  
+  .profile-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .invite-form input {
+    margin-top: 0.5rem;
+    padding: 0.4rem;
+  }
+  
+  .review-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 1rem;
+  }
+  
+  .review-list li {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+  }
+  
+  .review-controls {
+    margin-top: 0.5rem;
+  }
+  
+  .fixed-footer {
+    text-align: center;
+    position: fixed;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+  }
+  
