@@ -14,7 +14,7 @@ import userRouter from '../../controllers/users.js'
 import User from '../../models/User.js'
 import BookClub from '../../models/BookClub.js'
 import BookReview from '../../models/BookReview.js'
-import bodyParser from '../../middleware/bodyParser.js'
+import bodyParser from 'body-parser'
 
 // Variables
 
@@ -23,7 +23,7 @@ const port = process.env.PORT || 3000
 
 // Middleware
 app.use(methodOverride('_method'))
-app.use(bodyParser)
+app.use(bodyParser.urlencoded())
 app.use((req,res,next) =>{
 console.log(req.method + " " + req.url)
 console.log(req.body)
