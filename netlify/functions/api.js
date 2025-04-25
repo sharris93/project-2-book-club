@@ -27,6 +27,7 @@ app.use(bodyParser)
 app.use((req,res,next) =>{
 console.log(req.method + " " + req.url)
 console.log(req.body)
+console.log("content type", req.headers['content-type'])
 next()
 
 })
